@@ -20,3 +20,9 @@ xhr2.onerror = function (e) {
     console.error('error', e);
 };
 xhr2.send(null);
+
+// But sync request works on Tizen 5
+var xhr3 = new XMLHttpRequest();
+xhr3.open('GET', 'test.data', false);
+xhr3.send(null);
+console.log('load 3', xhr3.response);
