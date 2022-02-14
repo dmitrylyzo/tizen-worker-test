@@ -1,0 +1,17 @@
+body {
+    background: white;
+    font-size: 2em;
+}
+
+.tests {
+    display: flex;
+    flex-direction: column;
+}
+
+.success {
+    background: greenyellow;
+}
+
+.failed {
+    background: pink;
+}
