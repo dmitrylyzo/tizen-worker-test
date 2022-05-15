@@ -10,6 +10,20 @@ function getAbsUrl() {
     return 'file:///opt/usr/apps/GV24KP5ul8/res/wgt/test.data';
 }
 
+function resolveUrl(url) {
+    return new Promise(function (resolve, reject) {
+        var xhr = new XMLHttpRequest();
+        xhr.open('HEAD', url, true);
+        xhr.onload = function () {
+            resolve(xhr.responseURL);
+        };
+        xhr.onerror = function (e) {
+            reject(e);
+        };
+        xhr.send(null);
+    });
+}
+
 function runAsync(name, url) {
     var test = document.querySelector('#' + name);
 
@@ -76,5 +90,12 @@ window.onload = function () {
         name: 'worker3',
         url: 'test.data',
         sync: true
+    });
+
+    resolveUrl('test.data').then(function (url) {
+        worker.postMessage({
+            name: 'worker4',
+            url: url
+        });
     });
 }
